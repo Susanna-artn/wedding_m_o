@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Свадьба Миши &amp; Оли — 08.08.2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:   #EDE3D2;
+      --card: #F2EAD8;
+      --blue: #4E7BA0;
+      --burg: #7A2236;
+      --ink:  #1E1410;
+      --soft: #8A7060;
+      --pale: rgba(255,255,255,.55);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:#D8CCBA;
+      background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8a888' fill-opacity='0.12'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      font-family:'Nunito',sans-serif;
+      color:var(--ink);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+    }
+
+    .card{
+      background:var(--card);
+      width:100%;max-width:520px;
+      min-height:100vh;
+      position:relative;overflow:hidden;
+      padding:0 0 3rem;
+    }
+
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+    .rv.on{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}
+
+    .wavy{display:block;width:100%}
+    .h{position:absolute;font-style:normal;user-select:none;pointer-events:none;line-height:1}
+
+    /* TOP BANNER */
+    .top-banner{background:var(--burg);padding:.6rem 1.5rem;text-align:center}
+    .top-banner p{font-family:'Caveat',cursive;font-size:clamp(.9rem,3vw,1.1rem);color:rgba(255,255,255,.88);letter-spacing:.08em}
+
+    /* HERO */
+    .hero{padding:2.8rem 2rem 0;text-align:center;position:relative}
+    .hero__pre{font-family:'Caveat',cursive;font-size:clamp(1rem,3.5vw,1.3rem);color:var(--soft);letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.4rem}
+    .hero__title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,14vw,6rem);font-weight:600;line-height:.92;color:var(--ink);display:block;letter-spacing:.04em}
+    .hero__sub{font-family:'Caveat',cursive;font-size:clamp(1.4rem,5vw,2rem);color:var(--burg);margin:.6rem 0 .2rem;display:block}
+    .hero__date{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,4vw,1.6rem);color:var(--blue);letter-spacing:.18em;display:block;margin-bottom:.2rem}
+
+    /* SINGLE TOP POLAROID */
+    .top-photo-wrap{padding:2rem 1.8rem 1.5rem;text-align:center}
+    .top-photo-label{font-family:'Caveat',cursive;font-size:clamp(.9rem,3vw,1.1rem);color:var(--soft);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;display:block}
+    .top-pol-outer{display:inline-block;position:relative;cursor:pointer}
+    .top-pol{background:#fff;padding:.9rem .9rem .5rem;box-shadow:5px 8px 26px rgba(30,20,16,.22);transform:rotate(1.2deg);transition:transform .35s cubic-bezier(.34,1.56,.64,1);max-width:240px;width:clamp(160px,55vw,240px);display:inline-block}
+    .top-pol-outer:hover .top-pol{transform:rotate(0deg) scale(1.03)}
+    .top-pol-img{width:100%;aspect-ratio:3/4;overflow:hidden;position:relative;background:linear-gradient(135deg,#E8DACC,#D8C8BA);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem}
+    .top-pol-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+    .top-pol-img .ph-ico{font-size:2rem}
+    .top-pol-img .ph-txt{font-family:'Caveat',cursive;font-size:.85rem;color:var(--soft);line-height:1.4;text-align:center}
+    .top-pol-cap{font-family:'Caveat',cursive;font-size:clamp(.95rem,3vw,1.1rem);color:var(--soft);margin-top:.5rem;text-align:center}
+    .top-pol-inp{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:5}
+
+    .top-photo-text{font-family:'Caveat',cursive;font-size:clamp(1.1rem,3.8vw,1.4rem);color:var(--ink);line-height:1.6;margin-top:1.2rem}
+    .top-photo-text em{color:var(--burg);font-style:normal}
+
+    /* INVITE */
+    .invite-text{padding:.5rem 2rem 1.5rem;text-align:center}
+    .invite-text__title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,4.5vw,1.8rem);letter-spacing:.08em;color:var(--ink);margin-bottom:.8rem}
+    .invite-text p{font-size:clamp(.88rem,2.8vw,1rem);color:var(--soft);line-height:1.75}
+
+    /* COUNTDOWN */
+    .cd-wrap{display:flex;justify-content:center;gap:clamp(.4rem,1.8vw,1rem);margin:0 1.5rem 1.8rem;flex-wrap:wrap}
+    .cd-pill{background:#fff;border-radius:14px;padding:.65rem 1rem;text-align:center;min-width:68px;box-shadow:0 2px 12px rgba(30,20,16,.1),inset 0 1px 0 rgba(255,255,255,.8);border:1px solid rgba(122,34,54,.18)}
+    .cd-pill:nth-child(even){border-color:rgba(78,123,160,.25)}
+    .cd-n{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,6vw,2.6rem);color:var(--burg);line-height:1;display:block;font-weight:600}
+    .cd-pill:nth-child(even) .cd-n{color:var(--blue)}
+    .cd-l{font-family:'Caveat',cursive;font-size:.8rem;color:var(--soft);display:block;margin-top:.1rem}
+
+    .cal-btn-wrap{text-align:center;margin:-.3rem 0 1.8rem}
+    .cal-btn{font-family:'Caveat',cursive;font-size:1.05rem;color:var(--blue);border:1.5px dashed var(--blue);border-radius:50px;padding:.35rem 1.3rem;background:transparent;cursor:pointer;transition:all .18s}
+    .cal-btn:hover{background:var(--blue);color:#fff;border-style:solid}
+
+    .mini-cal-wrap{text-align:center;margin-bottom:1.5rem}
+    .mini-cal{display:inline-block;background:rgba(255,255,255,.6);border-radius:16px;padding:1rem 1.1rem;border:1px solid rgba(78,123,160,.2);box-shadow:0 2px 10px rgba(30,20,16,.08)}
+    .cal-month{font-family:'Caveat',cursive;font-size:1rem;color:var(--soft);text-align:center;margin-bottom:.5rem;letter-spacing:.1em;text-transform:uppercase}
+    .cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:.1rem;text-align:center}
+    .cal-hd{font-size:.6rem;color:var(--soft);padding:.15rem 0;opacity:.7}
+    .cal-d{font-family:'Cormorant Garamond',serif;font-size:.82rem;padding:.2rem .1rem;border-radius:5px}
+    .cal-d.today{background:var(--burg);color:#fff;font-weight:700}
+    .cal-d.empty{opacity:0}
+
+    /* SECTION TITLES */
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,5vw,2rem);font-weight:600;letter-spacing:.1em;text-align:center;color:var(--ink);margin-bottom:.3rem}
+    .section-sub{font-family:'Caveat',cursive;font-size:clamp(.95rem,3vw,1.15rem);color:var(--soft);text-align:center;margin-bottom:1.1rem}
+
+    /* PROGRAM */
+    .program{padding:0 1.8rem;margin-bottom:.8rem}
+    .prog-line{display:flex;align-items:stretch;gap:1rem;margin-bottom:.8rem}
+    .prog-line__left{display:flex;flex-direction:column;align-items:center;width:54px;flex-shrink:0}
+    .prog-time{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,4.5vw,1.8rem);font-weight:600;line-height:1;white-space:nowrap}
+    .prog-line:nth-child(1) .prog-time{color:var(--blue)}
+    .prog-line:nth-child(2) .prog-time{color:var(--burg)}
+    .prog-line__body{background:var(--pale);border-radius:14px;padding:.9rem 1.1rem;flex:1;border-left:3px solid transparent}
+    .prog-line:nth-child(1) .prog-line__body{border-color:var(--blue)}
+    .prog-line:nth-child(2) .prog-line__body{border-color:var(--burg)}
+    .prog-event{font-family:'Caveat',cursive;font-size:clamp(1.1rem,3.8vw,1.4rem);color:var(--ink);margin-bottom:.2rem}
+    .prog-addr{font-size:.82rem;color:var(--soft);line-height:1.65}
+    .prog-note{font-family:'Caveat',cursive;font-size:.95rem;margin-top:.25rem}
+    .prog-line:nth-child(1) .prog-note{color:var(--blue)}
+    .prog-line:nth-child(2) .prog-note{color:var(--burg)}
+    .prog-btns{display:flex;gap:.45rem;margin-top:.55rem;flex-wrap:wrap}
+    .pbtn{font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:600;border-radius:20px;padding:.25rem .85rem;cursor:pointer;text-decoration:none;transition:all .18s;border:none;display:inline-flex;align-items:center;gap:.25rem}
+    .pbtn-blue{background:#EBF2FA;color:var(--blue);border:1.5px solid var(--blue)}
+    .pbtn-blue:hover{background:var(--blue);color:#fff}
+    .pbtn-burg{background:#FAEbEC;color:var(--burg);border:1.5px solid var(--burg)}
+    .pbtn-burg:hover{background:var(--burg);color:#fff}
+
+    /* DRESS CODE */
+    .dresscode{padding:0 1.8rem;text-align:center;margin-bottom:.8rem}
+    .palette{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(.5rem,2vw,.9rem);max-width:320px;margin:1rem auto .8rem}
+    .sw{aspect-ratio:1;border-radius:50%;width:100%;box-shadow:2px 3px 8px rgba(30,20,16,.18);transition:transform .2s;position:relative}
+    .sw:hover{transform:scale(1.18) rotate(4deg)}
+    .sw::after{content:attr(title);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-family:'Caveat',cursive;font-size:.72rem;padding:.18rem .5rem;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s}
+    .sw:hover::after{opacity:1}
+    .dc-warn{font-family:'Caveat',cursive;font-size:clamp(.88rem,2.8vw,1.05rem);color:var(--burg);opacity:.8}
+
+    /* RSVP FORM */
+    .rsvp{padding:0 1.8rem;margin-bottom:.8rem}
+    .rsvp-card{background:rgba(255,255,255,.55);border-radius:20px;padding:1.4rem 1.3rem;border:1px solid rgba(122,34,54,.12);box-shadow:0 2px 14px rgba(30,20,16,.07)}
+    .rsvp-note{font-family:'Caveat',cursive;font-size:clamp(.88rem,2.8vw,1.05rem);color:var(--burg);text-align:center;margin-bottom:1.2rem;line-height:1.5}
+    .rsvp-field{margin-bottom:1.1rem}
+    .rsvp-lbl{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,3.5vw,1.25rem);color:var(--ink);display:block;margin-bottom:.5rem;font-weight:600}
+    .rsvp-input{width:100%;background:rgba(255,255,255,.8);border:1.5px solid rgba(122,34,54,.2);border-radius:10px;padding:.65rem .9rem;font-family:'Nunito',sans-serif;font-size:.95rem;color:var(--ink);outline:none;transition:border-color .2s}
+    .rsvp-input:focus{border-color:var(--burg)}
+    .rsvp-input::placeholder{color:var(--soft);opacity:.7}
+    .rsvp-options{display:flex;flex-direction:column;gap:.5rem}
+    .rsvp-opt{display:flex;align-items:center;gap:.65rem;cursor:pointer;padding:.4rem .5rem;border-radius:8px;transition:background .15s}
+    .rsvp-opt:hover{background:rgba(122,34,54,.05)}
+    .rsvp-opt input[type=radio],.rsvp-opt input[type=checkbox]{accent-color:var(--burg);width:17px;height:17px;cursor:pointer;flex-shrink:0}
+    .rsvp-opt-txt{font-family:'Nunito',sans-serif;font-size:.92rem;color:var(--ink)}
+    .rsvp-checks{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .6rem}
+    .rsvp-custom{display:flex;align-items:center;gap:.5rem;margin-top:.2rem;grid-column:1/-1}
+    .rsvp-custom-inp{flex:1;background:rgba(255,255,255,.8);border:1.5px solid rgba(122,34,54,.2);border-radius:8px;padding:.4rem .7rem;font-family:'Nunito',sans-serif;font-size:.88rem;color:var(--ink);outline:none;transition:border-color .2s;min-width:0}
+    .rsvp-custom-inp:focus{border-color:var(--burg)}
+    .rsvp-custom-inp:disabled{opacity:.4;cursor:not-allowed}
+    .rsvp-custom-inp::placeholder{color:var(--soft);opacity:.7}
+    .rsvp-submit{display:block;width:100%;margin-top:1.3rem;padding:.75rem;background:var(--burg);color:#fff;border:none;border-radius:50px;font-family:'Caveat',cursive;font-size:1.15rem;letter-spacing:.06em;cursor:pointer;box-shadow:0 3px 14px rgba(122,34,54,.3);transition:all .2s}
+    .rsvp-submit:hover{background:#9a2a40;box-shadow:0 5px 20px rgba(122,34,54,.4);transform:translateY(-1px)}
+    .rsvp-submit:active{transform:translateY(0)}
+
+    /* WISHES */
+    .wishes{padding:0 1.8rem;margin-bottom:.8rem}
+    .wish-items{display:flex;flex-direction:column;gap:.65rem}
+    .wish-row{display:flex;align-items:flex-start;gap:.8rem;background:var(--pale);border-radius:12px;padding:.8rem 1rem}
+    .wish-ico{font-size:1.5rem;flex-shrink:0;margin-top:.05rem}
+    .wish-txt{font-size:.9rem;color:var(--ink);line-height:1.6}
+    .wish-txt strong{color:var(--burg)}
+
+    /* VENUE POLAROID */
+    .venue-pol-wrap{
+      display:flex;justify-content:center;
+      margin:.2rem 0 1.6rem;
+    }
+    .venue-pol-link{text-decoration:none;display:inline-block;}
+    .venue-pol{
+      background:#fff;
+      padding:.85rem .85rem .3rem;
+      box-shadow:5px 8px 28px rgba(30,20,16,.26);
+      transform:rotate(-2.5deg);
+      transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+      width:clamp(190px,62vw,270px);
+      display:inline-block;
+    }
+    .venue-pol-link:hover .venue-pol{transform:rotate(0deg) scale(1.03)}
+    .venue-pol img{
+      width:100%;display:block;
+      aspect-ratio:4/3;
+      object-fit:cover;object-position:center;
+    }
+    .venue-pol__cap{
+      font-family:'Caveat',cursive;
+      font-size:clamp(1rem,3.5vw,1.2rem);
+      color:var(--ink);
+      text-align:center;
+      padding:.5rem .2rem .45rem;
+      line-height:1.25;
+    }
+    .venue-pol__sub{
+      font-size:.78rem;color:var(--soft);
+      font-family:'Caveat',cursive;
+      display:block;margin-top:.05rem;
+    }
+
+    /* SCATTERED STICKER PHOTOS WITH MARKER EFFECT */
+    .sticker-scene{
+      display:flex;
+      justify-content:center;
+      position:relative;
+      z-index:4;
+      margin:1.4rem 0;
+      overflow:visible;
+    }
+    .sticker{
+      display:inline-block;
+      background:#fff;
+      padding:7px 7px 26px;
+      box-shadow:4px 7px 24px rgba(30,20,16,.28);
+      position:relative;
+      width:clamp(160px,60vw,270px);
+    }
+    .sticker img{
+      width:100%;
+      display:block;
+      aspect-ratio:2/3;
+      object-fit:cover;
+      object-position:top center;
+    }
+    /* Marker outline via pseudo-element + SVG filter */
+    .sticker::before{
+      content:'';
+      position:absolute;
+      inset:-6px;
+      border:3.5px solid var(--ink);
+      pointer-events:none;
+      filter:url(#scribble);
+    }
+    .sticker-cap{
+      font-family:'Caveat',cursive;
+      font-size:clamp(.88rem,2.8vw,1rem);
+      color:var(--soft);
+      text-align:center;
+      margin-top:.3rem;
+    }
+
+    /* FOOTER */
+    .footer{text-align:center;padding:1.5rem 2rem .8rem}
+    .footer__title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,8vw,3.5rem);font-weight:600;line-height:1;color:var(--ink);letter-spacing:.06em;margin-bottom:.4rem}
+    .footer__sub{font-family:'Caveat',cursive;font-size:clamp(1.1rem,3.5vw,1.4rem);color:var(--soft);margin-bottom:.2rem}
+    .footer__hearts{font-size:1.3rem;letter-spacing:.4em;margin-top:.6rem}
+
+    .share-wrap{text-align:center;padding:.8rem 0 .4rem}
+    .share-btn{font-family:'Caveat',cursive;font-size:1.05rem;color:var(--soft);border:none;background:transparent;cursor:pointer;opacity:.55;transition:opacity .2s;display:inline-flex;align-items:center;gap:.35rem}
+    .share-btn:hover{opacity:1}
+
+    .divider{display:flex;align-items:center;gap:.8rem;padding:.5rem 2rem;margin:.5rem 0}
+    .divider__line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(122,34,54,.25),transparent)}
+    .divider__icon{font-size:.85rem;color:var(--burg);opacity:.5;flex-shrink:0}
+
+    /* COUPLE LEFT PHOTO (countdown area — floats upward) */
+    .couple-left-scene{position:relative;height:0;overflow:visible;z-index:3}
+    .couple-left-img{position:absolute;left:0;bottom:0;width:clamp(190px,58vw,270px);pointer-events:none;user-select:none;display:block}
+
+    /* DRESSCODE PHOTO (below dc-warn — normal flow) */
+    .dc-photo-scene{line-height:0;overflow:visible;z-index:3}
+    .dc-photo-img{display:block;width:clamp(190px,60vw,280px);margin:0 auto;pointer-events:none;user-select:none}
+
+    #toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--burg);color:#fff;padding:.55rem 1.4rem;border-radius:50px;font-family:'Caveat',cursive;font-size:1.05rem;box-shadow:0 4px 18px rgba(0,0,0,.22);transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .35s;opacity:0;z-index:9999;pointer-events:none}
+
+    /* MUSIC PLAYER */
+    .music-wrap{display:flex;align-items:center;justify-content:center;gap:.9rem;padding:.6rem 2rem 1rem}
+    .music-btn{width:44px;height:44px;border-radius:50%;background:var(--burg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(122,34,54,.35);transition:transform .2s,box-shadow .2s;flex-shrink:0;position:relative}
+    .music-btn:hover{transform:scale(1.08);box-shadow:0 5px 20px rgba(122,34,54,.45)}
+    .music-btn svg{fill:#fff;width:16px;height:16px;margin-left:2px;transition:opacity .2s}
+    .music-btn.playing svg.ico-play{display:none}
+    .music-btn.playing svg.ico-pause{display:block!important}
+    @keyframes music-ring{0%,100%{box-shadow:0 3px 14px rgba(122,34,54,.35),0 0 0 0 rgba(122,34,54,.3)}50%{box-shadow:0 3px 14px rgba(122,34,54,.35),0 0 0 8px rgba(122,34,54,0)}}
+    .music-btn.playing{animation:music-ring 1.8s ease-in-out infinite}
+    .music-info{text-align:left}
+    .music-title{display:block;font-family:'Caveat',cursive;font-size:clamp(1rem,3.5vw,1.2rem);color:var(--ink);line-height:1.2}
+    .music-artist{display:block;font-family:'Caveat',cursive;font-size:.82rem;color:var(--soft);letter-spacing:.05em}
+    .music-bars{display:flex;align-items:flex-end;gap:2px;height:16px;margin-left:.3rem;opacity:0;transition:opacity .3s}
+    .music-bars.on{opacity:1}
+    .music-bars span{display:block;width:3px;background:var(--burg);border-radius:2px;animation:none}
+    .music-bars.on span:nth-child(1){animation:bar 1s ease-in-out -.3s infinite}
+    .music-bars.on span:nth-child(2){animation:bar 1s ease-in-out -.1s infinite}
+    .music-bars.on span:nth-child(3){animation:bar 1s ease-in-out -.5s infinite}
+    @keyframes bar{0%,100%{height:4px}50%{height:14px}}
+  </style>
+</head>
+<body>
+
+<!-- SVG filter for marker/scribble outline effect -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <filter id="scribble" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="2" seed="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="card">
+
+  <i class="h" style="top:7%;left:6%;font-size:1.3rem;color:var(--burg);transform:rotate(-12deg)">♡</i>
+  <i class="h" style="top:6%;right:8%;font-size:.9rem;color:var(--blue);transform:rotate(10deg)">♥</i>
+  <i class="h" style="top:11%;left:74%;font-size:.8rem;color:var(--burg);transform:rotate(20deg)">♡</i>
+
+  <!-- TOP BANNER -->
+  <div class="top-banner">
+    <p>08 · 08 · 2026 &nbsp;·&nbsp; Самара</p>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero rv">
+    <span class="hero__pre">Приглашение на</span>
+    <span class="hero__title">СВАДЬБУ</span>
+    <span class="hero__sub">Миша &amp; Оля</span>
+    <span class="hero__date">08 · 08 · 2026</span>
+  </div>
+
+  <div style="text-align:center;margin:.5rem 0 .3rem;font-size:1rem;letter-spacing:.5em;color:var(--burg);opacity:.5">♡ ♡ ♡</div>
+
+  <!-- MUSIC PLAYER -->
+  <div class="music-wrap rv">
+    <button class="music-btn" id="musicBtn" aria-label="Воспроизвести музыку">
+      <svg class="ico-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+    <div class="music-info">
+      <span class="music-title">Enjoy the Silence</span>
+      <span class="music-artist">Depeche Mode</span>
+    </div>
+    <div class="music-bars" id="musicBars">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <audio id="weddingAudio" src="Depeche_Mode_-_Enjoy_The_Silence_(musmore.org).mp3" preload="none"></audio>
+
+  <svg class="wavy" viewBox="0 0 400 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="margin:.6rem 0 0">
+    <path d="M0,11 Q50,0 100,11 Q150,22 200,11 Q250,0 300,11 Q350,22 400,11" stroke="#7A2236" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".35"/>
+  </svg>
+
+  <!-- SINGLE TOP POLAROID -->
+  <div class="top-photo-wrap rv">
+    <span class="top-photo-label">— нейросеть не врёт —</span>
+
+    <div class="top-pol-outer" id="topPolWrap">
+      <div class="top-pol">
+        <div class="top-pol-img" id="topPolImg">
+          <img src="childhood.jpg" alt="Маленькие Миша и Оля" onerror="this.style.display='none'"/>
+          <span class="ph-ico" id="topPhIco" style="display:none">📷</span>
+          <span class="ph-txt" id="topPhTxt" style="display:none">детское фото</span>
+        </div>
+        <div class="top-pol-cap">«маленькие» Миша &amp; Оля ✦ ИИ-версия</div>
+      </div>
+      <input type="file" accept="image/*" class="top-pol-inp" id="inTopPol"/>
+    </div>
+
+    <p class="top-photo-text rv d1">
+      ИИ придумал нам общее детство.<br>
+      <em>Остальное — уже настоящее ♡</em>
+    </p>
+  </div>
+
+  <svg class="wavy" viewBox="0 0 400 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="margin:.2rem 0 .8rem">
+    <path d="M0,11 Q50,22 100,11 Q150,0 200,11 Q250,22 300,11 Q350,0 400,11" stroke="#4E7BA0" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".35"/>
+  </svg>
+
+  <!-- INVITE TEXT -->
+  <div class="invite-text rv">
+    <p class="invite-text__title">Дорогие друзья и родные!</p>
+    <p>В нашей жизни наступает счастливый момент — мы создаём семью. Хотим разделить этот особенный день с самыми близкими и дорогими для нас людьми.</p>
+    <p style="margin-top:.6rem">Будем безмерно рады видеть вас рядом <span style="color:var(--burg)">♡</span></p>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="cd-wrap rv">
+    <div class="cd-pill"><span class="cd-n" id="cd-d">–</span><span class="cd-l">дней</span></div>
+    <div class="cd-pill"><span class="cd-n" id="cd-h">–</span><span class="cd-l">часов</span></div>
+    <div class="cd-pill"><span class="cd-n" id="cd-m">–</span><span class="cd-l">минут</span></div>
+    <div class="cd-pill"><span class="cd-n" id="cd-s">–</span><span class="cd-l">секунд</span></div>
+  </div>
+
+  <div class="mini-cal-wrap rv">
+    <div class="mini-cal">
+      <div class="cal-month">Август 2026</div>
+      <div class="cal-g" id="calG"></div>
+    </div>
+  </div>
+
+  <div class="cal-btn-wrap rv">
+    <button class="cal-btn" id="calBtn">📅 Добавить в календарь</button>
+  </div>
+
+  <!-- COUPLE LEFT PHOTO -->
+  <div class="couple-left-scene rv">
+    <img src="IMG_0232-3.png" alt="Миша и Оля" class="couple-left-img"/>
+  </div>
+
+  <div class="divider"><div class="divider__line"></div><span class="divider__icon">✦</span><div class="divider__line"></div></div>
+
+  <!-- PROGRAM -->
+  <div class="program rv">
+    <p class="section-title">Программа дня</p>
+    <p class="section-sub">суббота, 8 августа 2026</p>
+
+    <div class="prog-line rv d1">
+      <div class="prog-line__left"><div class="prog-time">14:20</div></div>
+      <div class="prog-line__body">
+        <div class="prog-event">💍 Роспись в ЗАГСе</div>
+        <p class="prog-addr">Красноглинский ЗАГС<br>пос. Управленческий, ул. Сергея Лазо, 13</p>
+        <div class="prog-note">♡ Просим приехать немного заранее</div>
+        <div class="prog-btns">
+          <a class="pbtn pbtn-blue" href="https://yandex.ru/maps/?text=%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0%2C+%D0%BF%D0%BE%D1%81.+%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%2C+%D1%83%D0%BB.+%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D1%8F+%D0%9B%D0%B0%D0%B7%D0%BE%2C+13" target="_blank" rel="noopener">📍 На карте</a>
+          <button class="pbtn pbtn-blue" data-copy="Самара, пос. Управленческий, ул. Сергея Лазо, 13">📋 Скопировать</button>
+        </div>
+      </div>
+    </div>
+
+  <!-- ZAGS POLAROID -->
+  <div class="venue-pol-wrap rv">
+    <a class="venue-pol-link" href="https://yandex.ru/maps/?text=%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0%2C+%D0%BF%D0%BE%D1%81.+%D0%A3%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%2C+%D1%83%D0%BB.+%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D1%8F+%D0%9B%D0%B0%D0%B7%D0%BE%2C+13" target="_blank" rel="noopener">
+      <div class="venue-pol" style="transform:rotate(2deg)">
+        <img src="zags.jpg" alt="Красноглинский ЗАГС"/>
+        <div class="venue-pol__cap">
+          Красноглинский ЗАГС<br>
+          <span class="venue-pol__sub">пос. Управленческий · 📍 на карте</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+    <div class="prog-line rv d2">
+      <div class="prog-line__left"><div class="prog-time">16:00</div></div>
+      <div class="prog-line__body">
+        <div class="prog-event">🥂 Торжество</div>
+        <div class="prog-note">✨ Танцы, тосты и счастье!</div>
+        <div class="prog-btns">
+          <button class="pbtn pbtn-burg" data-copy="Самара, улица Князева, 64в">📋 Скопировать адрес</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VENUE POLAROID -->
+  <div class="venue-pol-wrap rv">
+    <a class="venue-pol-link" href="https://yandex.ru/maps/?text=%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%9A%D0%BD%D1%8F%D0%B7%D0%B5%D0%B2%D0%B0+64%D0%B2" target="_blank" rel="noopener">
+      <div class="venue-pol">
+        <img src="venue.jpg" alt="Место торжества"/>
+        <div class="venue-pol__cap">
+          место торжества<br>
+          <span class="venue-pol__sub">ул. Князева, 64в · 📍 на карте</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+
+  <div class="divider"><div class="divider__line"></div><span class="divider__icon">✦</span><div class="divider__line"></div></div>
+
+  <!-- DRESS CODE -->
+  <div class="dresscode rv">
+    <p class="section-title">Дресс-код</p>
+    <p class="section-sub">Нам будет приятно, если вы поддержите нашу цветовую палитру ♡<br>Дамам — вечерние наряды, кавалерам — тёмные костюмы</p>
+    <div class="palette">
+      <div class="sw" style="background:#6B1929" title="Бордо"></div>
+      <div class="sw" style="background:#A01C2E" title="Тёмно-красный"></div>
+      <div class="sw" style="background:#C47B86" title="Пыльная роза"></div>
+      <div class="sw" style="background:#E8AEB0" title="Нежно-розовый"></div>
+      <div class="sw" style="background:#C8A870" title="Шампань"></div>
+      <div class="sw" style="background:#EDE0C4" title="Айвори"></div>
+      <div class="sw" style="background:#96C0D8" title="Голубой"></div>
+      <div class="sw" style="background:#5B7DA8" title="Стальной синий"></div>
+      <div class="sw" style="background:#1E3052" title="Тёмно-синий"></div>
+      <div class="sw" style="background:#B8A090" title="Тауп"></div>
+      <div class="sw" style="background:#3D2010" title="Шоколад"></div>
+      <div class="sw" style="background:#C0B06A" title="Хаки"></div>
+      <div class="sw" style="background:#5A6832" title="Оливковый"></div>
+      <div class="sw" style="background:#8AA08A" title="Шалфей"></div>
+      <div class="sw" style="background:#1A1A1A" title="Чёрный"></div>
+    </div>
+    <p class="dc-warn">⚠️ Белый и молочный — только для невесты</p>
+  </div>
+
+  <!-- PHOTO DRESSCODE -->
+  <div class="dc-photo-scene rv">
+    <img src="IMG_0206-33.png" alt="Миша и Оля" class="dc-photo-img"/>
+  </div>
+
+  <div class="divider"><div class="divider__line"></div><span class="divider__icon">✦</span><div class="divider__line"></div></div>
+
+  <!-- RSVP FORM -->
+  <div class="rsvp rv">
+    <p class="section-title">Анкета</p>
+    <p class="section-sub">будем очень признательны, если сообщите<br>о своём решении до 01.05.2026</p>
+    <div class="rsvp-card">
+      <form action="https://formsubmit.co/michailkremer@yandex.ru" method="POST">
+        <input type="hidden" name="_subject" value="Ответ на свадьбу Миши и Оли 08.08.2026"/>
+        <input type="hidden" name="_captcha" value="false"/>
+        <input type="hidden" name="_template" value="table"/>
+
+        <div class="rsvp-field">
+          <label class="rsvp-lbl" for="rsvp-name">Ваше имя и фамилия</label>
+          <input class="rsvp-input" type="text" id="rsvp-name" name="Имя и фамилия" placeholder="Иван и Алёна Смирновы" required/>
+        </div>
+
+        <div class="rsvp-field">
+          <span class="rsvp-lbl">Сможете ли вы присутствовать на торжестве?</span>
+          <div class="rsvp-options">
+            <label class="rsvp-opt">
+              <input type="radio" name="Присутствие" value="Обязательно приду" required/>
+              <span class="rsvp-opt-txt">Обязательно приду ♡</span>
+            </label>
+            <label class="rsvp-opt">
+              <input type="radio" name="Присутствие" value="К сожалению, не смогу"/>
+              <span class="rsvp-opt-txt">К сожалению, не смогу присутствовать</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="rsvp-field">
+          <span class="rsvp-lbl">Что предпочитаете из напитков?</span>
+          <div class="rsvp-options rsvp-checks">
+            <label class="rsvp-opt">
+              <input type="checkbox" name="Напитки" value="Самогон"/>
+              <span class="rsvp-opt-txt">Самогон</span>
+            </label>
+            <label class="rsvp-opt">
+              <input type="checkbox" name="Напитки" value="Вино сухое"/>
+              <span class="rsvp-opt-txt">Вино сухое</span>
+            </label>
+            <label class="rsvp-opt">
+              <input type="checkbox" name="Напитки" value="Вино полусладкое"/>
+              <span class="rsvp-opt-txt">Вино полусладкое</span>
+            </label>
+            <label class="rsvp-opt">
+              <input type="checkbox" name="Напитки" value="Шампанское"/>
+              <span class="rsvp-opt-txt">Шампанское</span>
+            </label>
+            <label class="rsvp-opt" style="grid-column:1/-1">
+              <input type="checkbox" name="Напитки" value="Не буду пить"/>
+              <span class="rsvp-opt-txt">Не буду пить</span>
+            </label>
+            <label class="rsvp-custom">
+              <input type="checkbox" id="chkCustom" name="Напитки" value="Свой вариант"/>
+              <span class="rsvp-opt-txt">Свой вариант:</span>
+              <input class="rsvp-custom-inp" type="text" id="customDrink" name="Свой напиток" placeholder="напишите..." disabled/>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="rsvp-submit">Отправить ♡</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider__line"></div><span class="divider__icon">✦</span><div class="divider__line"></div></div>
+
+  <!-- WISHES -->
+  <div class="wishes rv">
+    <p class="section-title" style="margin-bottom:.3rem">Детали</p>
+    <p class="section-sub">маленькие, но важные</p>
+    <div class="wish-items">
+      <div class="wish-row">
+        <span class="wish-ico">🌷</span>
+        <p class="wish-txt">Тёплые слова приносите в сердцах — а вместо цветов будем рады хорошему вину: оно согреет наши вечера и будет напоминать об этом дне ♡</p>
+      </div>
+      <div class="wish-row">
+        <span class="wish-ico">🍎</span>
+        <p class="wish-txt">Сертификат в <strong>Золотое Яблоко</strong> тоже будет чудесным подарком — невеста точно найдёт применение 😊</p>
+      </div>
+      <div class="wish-row">
+        <span class="wish-ico">📝</span>
+        <p class="wish-txt">Открытка с тёплыми словами — будем перечитывать в каждую годовщину и улыбаться</p>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:1rem;font-family:'Caveat',cursive;font-size:clamp(.9rem,2.8vw,1.1rem);color:var(--soft)">
+      С нетерпением ждём встречи! 🤍
+    </p>
+  </div>
+
+  <!-- PHOTO WISHES -->
+  <div class="dc-photo-scene rv">
+    <img src="IMG_0318-2_4.png" alt="Миша и Оля" class="dc-photo-img"/>
+  </div>
+
+  <svg class="wavy" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="margin:.8rem 0">
+    <path d="M0,14 Q50,28 100,14 Q150,0 200,14 Q250,28 300,14 Q350,0 400,14" stroke="#7A2236" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".35"/>
+  </svg>
+
+  <!-- FOOTER -->
+  <div class="footer rv">
+    <div class="footer__title">Ждём вас!</div>
+    <p class="footer__sub">Миша <span style="color:var(--burg)">♥</span> Оля</p>
+    <p class="footer__sub" style="font-size:clamp(.9rem,2.8vw,1.05rem);opacity:.8">08 августа 2026 · Самара</p>
+    <div class="footer__hearts">
+      <span style="color:var(--burg)">♡</span>
+      <span style="color:var(--blue)">♥</span>
+      <span style="color:var(--burg)">♡</span>
+    </div>
+  </div>
+
+  <div class="share-wrap rv">
+    <button class="share-btn" id="shareBtn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Поделиться ссылкой
+    </button>
+  </div>
+
+</div>
+<div id="toast"></div>
+
+<script>
+/* —— COUNTDOWN —— */
+const TARGET = new Date('2026-08-08T14:20:00+04:00');
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const diff = TARGET - Date.now();
+  if(diff <= 0){ ['cd-d','cd-h','cd-m','cd-s'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent='00'; }); return; }
+  document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
+  document.getElementById('cd-h').textContent = pad(Math.floor(diff%86400000/3600000));
+  document.getElementById('cd-m').textContent = pad(Math.floor(diff%3600000/60000));
+  document.getElementById('cd-s').textContent = pad(Math.floor(diff%60000/1000));
+}
+tick(); setInterval(tick,1000);
+
+/* —— MINI CALENDAR Aug 2026 (starts Saturday = 5 Mon-based) —— */
+(function(){
+  const g = document.getElementById('calG');
+  if(!g) return;
+  ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach(d=>{ const el=document.createElement('div'); el.className='cal-hd'; el.textContent=d; g.appendChild(el); });
+  for(let i=0;i<5;i++){ const el=document.createElement('div'); el.className='cal-d empty'; el.textContent='-'; g.appendChild(el); }
+  for(let d=1;d<=31;d++){ const el=document.createElement('div'); el.className='cal-d'+(d===8?' today':''); el.textContent=d; g.appendChild(el); }
+})();
+
+/* —— ADD TO CALENDAR —— */
+document.getElementById('calBtn').addEventListener('click',function(){
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:misha-olya-2026@wedding','DTSTAMP:20260101T000000Z','DTSTART;TZID=Europe/Samara:20260808T142000','DTEND;TZID=Europe/Samara:20260809T020000','SUMMARY:💍 Свадьба Миши и Оли','DESCRIPTION:Роспись 14:20 — ул. Сергея Лазо 13\\nТоржество 16:00 — ул. Князева 64в','LOCATION:Самара\\, ул. Князева 64в','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));
+  a.download='свадьба_миша_оля.ics';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(a.href);
+});
+
+/* —— TOAST —— */
+const toastEl=document.getElementById('toast');
+let toastT;
+function showToast(msg){ toastEl.textContent='✓ '+msg; toastEl.style.opacity='1'; toastEl.style.transform='translateX(-50%) translateY(0)'; clearTimeout(toastT); toastT=setTimeout(()=>{ toastEl.style.opacity='0'; toastEl.style.transform='translateX(-50%) translateY(80px)'; },2500); }
+
+/* —— COPY —— */
+document.addEventListener('click',function(e){ const btn=e.target.closest('[data-copy]'); if(!btn) return; navigator.clipboard.writeText(btn.dataset.copy).then(()=>showToast('Адрес скопирован!')).catch(()=>showToast('Скопируйте вручную')); });
+
+/* —— SHARE —— */
+document.getElementById('shareBtn').addEventListener('click',async function(){ if(navigator.share){ try{ await navigator.share({title:'Свадьба Миши & Оли',text:'08.08.2026 · Самара',url:location.href}); }catch(e){} } else { try{ await navigator.clipboard.writeText(location.href); showToast('Ссылка скопирована!'); }catch(e){ showToast('Скопируйте адрес из браузера'); } } });
+
+/* —— TOP POLAROID UPLOAD —— */
+(function(){
+  const inp=document.getElementById('inTopPol');
+  const imgEl=document.querySelector('#topPolImg img');
+  const ico=document.getElementById('topPhIco');
+  const txt=document.getElementById('topPhTxt');
+  if(!inp) return;
+
+  function applyImg(url){
+    if(imgEl){ imgEl.src=url; imgEl.style.display='block'; }
+    if(ico) ico.style.display='none';
+    if(txt) txt.style.display='none';
+    try{ localStorage.setItem('ph_top',url); }catch(_){}
+  }
+
+  /* If the main img failed to load (file missing), show placeholder */
+  if(imgEl){
+    imgEl.addEventListener('error',function(){
+      this.style.display='none';
+      if(ico) ico.style.display='';
+      if(txt) txt.style.display='';
+    });
+  }
+
+  try{ const s=localStorage.getItem('ph_top'); if(s) applyImg(s); }catch(_){}
+
+  inp.addEventListener('change',function(){
+    const f=this.files&&this.files[0]; if(!f) return;
+    const r=new FileReader(); r.onload=e=>applyImg(e.target.result); r.readAsDataURL(f);
+  });
+  document.getElementById('topPolWrap').addEventListener('click',()=>inp.click());
+})();
+
+/* —— RSVP custom drink —— */
+(function(){
+  const chk = document.getElementById('chkCustom');
+  const inp = document.getElementById('customDrink');
+  if(!chk||!inp) return;
+  chk.addEventListener('change', function(){
+    inp.disabled = !this.checked;
+    if(this.checked) inp.focus();
+    else inp.value = '';
+  });
+})();
+
+/* —— MUSIC PLAYER —— */
+(function(){
+  const audio = document.getElementById('weddingAudio');
+  const btn   = document.getElementById('musicBtn');
+  const bars  = document.getElementById('musicBars');
+  let started = false;
+  btn.addEventListener('click', function(){
+    if(audio.paused){
+      if(!started){ audio.currentTime = 23; started = true; }
+      audio.play();
+      btn.classList.add('playing');
+      bars.classList.add('on');
+    } else {
+      audio.pause();
+      btn.classList.remove('playing');
+      bars.classList.remove('on');
+    }
+  });
+  audio.addEventListener('ended', function(){
+    btn.classList.remove('playing');
+    bars.classList.remove('on');
+  });
+})();
+
+/* —— SCROLL REVEAL —— */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } }),{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
